@@ -70,7 +70,19 @@ final _router = GoRouter(
     GoRoute(
       name: 'Login',
       path: '/login',
-      builder: (context, state) => const LoginScreen(),
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: const LoginScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          },
+          transitionDuration: const Duration(milliseconds: 1000),
+        );
+      },
     ),
     GoRoute(
       name: 'CourseList',
@@ -79,8 +91,21 @@ final _router = GoRouter(
     ),
     GoRoute(
       name: 'Attendance',
-      path: '/attendance',
-      builder: (context, state) => const AttendanceScreen(),
+      path: '/attendance/:course',
+      pageBuilder: (context, state) {
+        final course = state.pathParameters["course"]!;
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: AttendanceScreen(course: course),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          },
+          transitionDuration: const Duration(milliseconds: 1000),
+        );
+      },
     ),
   ],
 );

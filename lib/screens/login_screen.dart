@@ -65,6 +65,7 @@ class _LoginScreenState extends State<LoginScreen>
                         child: Column(
                           children: [
                             SizedBox(height: 6.h),
+
                             // Container Hero
                             Hero(
                               tag: 'containerHero',
@@ -94,6 +95,7 @@ class _LoginScreenState extends State<LoginScreen>
                               ),
                             ),
                             SizedBox(height: 3.h),
+
                             // Text Hero
                             Hero(
                               tag: 'textHero',
@@ -108,6 +110,8 @@ class _LoginScreenState extends State<LoginScreen>
                               ),
                             ),
                             SizedBox(height: 10.h),
+
+                            // Login Fields
                             CustomTextField(
                                 hintText: "Your ID", controller: idCont),
                             CustomTextField(
@@ -133,6 +137,7 @@ class _LoginScreenState extends State<LoginScreen>
                       );
                     }),
                 const Spacer(),
+
                 // Bottom Text Hero
                 Hero(
                   tag: 'bottomTextHero',

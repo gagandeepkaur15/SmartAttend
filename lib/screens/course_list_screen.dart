@@ -13,6 +13,7 @@ class CourseListScreen extends StatefulWidget {
 
 class _CourseListScreenState extends State<CourseListScreen>
     with TickerProviderStateMixin {
+  // Courses
   List<String> courses = [
     "MTL 100",
     "PYL 100",
@@ -21,7 +22,9 @@ class _CourseListScreenState extends State<CourseListScreen>
     "NEN 100"
   ];
 
+  // Index of course selected
   int indexSelected = -1;
+  // Text if no course selected
   bool showText = false;
 
   late AnimationController _controller;
@@ -101,6 +104,8 @@ class _CourseListScreenState extends State<CourseListScreen>
                 opacity: _opacityAnimation,
                 child: SlideTransition(
                   position: _listAnimation,
+
+                  // Courses List
                   child: ListView.builder(
                       itemCount: courses.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -115,7 +120,7 @@ class _CourseListScreenState extends State<CourseListScreen>
                           child: Container(
                             height: 5.h,
                             width: 100.w,
-                            padding: EdgeInsets.only(left: 15.sp),
+                            padding: EdgeInsets.only(left: 5.w),
                             margin: EdgeInsets.only(bottom: 1.5.h),
                             decoration: BoxDecoration(
                               color: index == indexSelected
@@ -160,7 +165,6 @@ class _CourseListScreenState extends State<CourseListScreen>
                 ),
               ),
             ),
-            // Bottom Text Hero
             FadeTransition(
               opacity: _opacityAnimation,
               child: SlideTransition(
@@ -168,13 +172,17 @@ class _CourseListScreenState extends State<CourseListScreen>
                 child: GestureDetector(
                   onTap: () {
                     if (indexSelected != -1) {
-                      context.go("/attendance");
+                      // context.go("/attendance");
+                      String course = courses[indexSelected];
+                      context.push("/attendance/$course");
                     } else {
                       setState(() {
                         showText = true;
                       });
                     }
                   },
+
+                  // button hero
                   child: const Hero(
                     tag: "button",
                     child: PrimaryButton(text: "Mark Attendance"),
@@ -193,6 +201,7 @@ class _CourseListScreenState extends State<CourseListScreen>
                 : const SizedBox.shrink(),
             SizedBox(height: 4.h),
             Center(
+              // bottom text hero
               child: Hero(
                 tag: 'bottomTextHero',
                 child: Text("Powered by Lucify",
