@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nami_task/widgets/custom_text_field.dart';
 import 'package:nami_task/widgets/primary_button.dart';
 import 'package:nami_task/widgets/white_button.dart';
@@ -112,7 +113,9 @@ class _LoginScreenState extends State<LoginScreen>
                             CustomTextField(
                                 hintText: "Password", controller: passCont),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                context.go('/courseList');
+                              },
                               child: const PrimaryButton(
                                 text: "Log in",
                               ),
@@ -136,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen>
                   child: Text("Powered by Lucify",
                       style: Theme.of(context).textTheme.bodySmall),
                 ),
-                SizedBox(height: 4.h),
+                SizedBox(height: 2.h),
               ],
             ),
           ),

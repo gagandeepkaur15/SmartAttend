@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nami_task/screens/attendance_screen.dart';
+import 'package:nami_task/screens/course_list_screen.dart';
 import 'package:nami_task/screens/login_screen.dart';
 import 'package:nami_task/screens/splash_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -20,14 +22,20 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xffE43E3A)),
           useMaterial3: true,
+          scaffoldBackgroundColor: Colors.white,
           primaryColor: const Color(0xffE43E3A),
           highlightColor: Colors.white,
           disabledColor: const Color(0xffDADADA),
-          scaffoldBackgroundColor: Colors.white,
+          indicatorColor: const Color(0xffCDFFCC),
           textTheme: TextTheme(
             headlineLarge: TextStyle(
               color: Colors.white,
               fontSize: 23.sp,
+              fontWeight: FontWeight.w600,
+            ),
+            headlineMedium: TextStyle(
+              color: Colors.black,
+              fontSize: 19.sp,
               fontWeight: FontWeight.w600,
             ),
             bodyMedium: TextStyle(
@@ -62,7 +70,17 @@ final _router = GoRouter(
     GoRoute(
       name: 'Login',
       path: '/login',
-      builder: (context, state) =>const LoginScreen(),
+      builder: (context, state) => const LoginScreen(),
+    ),
+    GoRoute(
+      name: 'CourseList',
+      path: '/courseList',
+      builder: (context, state) => const CourseListScreen(),
+    ),
+    GoRoute(
+      name: 'Attendance',
+      path: '/attendance',
+      builder: (context, state) => const AttendanceScreen(),
     ),
   ],
 );

@@ -207,7 +207,7 @@ class _SplashScreenState extends State<SplashScreen>
                 ),
               ),
             ),
-            SizedBox(height: 4.h),
+            SizedBox(height: 2.h),
           ],
         ),
       ),
