@@ -62,7 +62,7 @@ final _router = GoRouter(
     GoRoute(
       name: 'Login',
       path: '/login',
-      builder: (context, state) => LoginScreen(),
+      builder: (context, state) =>const LoginScreen(),
     ),
   ],
 );

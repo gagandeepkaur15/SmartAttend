@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:nami_task/screens/login_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -119,12 +118,6 @@ class _SplashScreenState extends State<SplashScreen>
     super.dispose();
   }
 
-  // void _startTransition() {
-  //   Future.delayed(const Duration(milliseconds: 1500), () {
-  //     context.go('/login');
-  //   });
-  // }
-
   void _startTransition() {
     // Wait for a brief period after animations complete, then navigate to next screen
     Future.delayed(const Duration(milliseconds: 500), () {
@@ -135,7 +128,7 @@ class _SplashScreenState extends State<SplashScreen>
   // Custom Routing to get fade in effect
   Route _createRoute() {
     return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => LoginScreen(),
+      pageBuilder: (context, animation, secondaryAnimation) => const LoginScreen(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(
           opacity: animation,

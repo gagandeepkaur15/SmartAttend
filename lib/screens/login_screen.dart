@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:nami_task/widgets/customTextField.dart';
-import 'package:nami_task/widgets/primaryButton.dart';
-import 'package:nami_task/widgets/whiteButton.dart';
+import 'package:nami_task/widgets/custom_text_field.dart';
+import 'package:nami_task/widgets/primary_button.dart';
+import 'package:nami_task/widgets/white_button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
