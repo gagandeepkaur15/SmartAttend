@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nami_task/screens/login_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -118,11 +119,31 @@ class _SplashScreenState extends State<SplashScreen>
     super.dispose();
   }
 
+  // void _startTransition() {
+  //   Future.delayed(const Duration(milliseconds: 1500), () {
+  //     context.go('/login');
+  //   });
+  // }
+
   void _startTransition() {
     // Wait for a brief period after animations complete, then navigate to next screen
-    Future.delayed(const Duration(milliseconds: 1500), () {
-      context.go('/login');
+    Future.delayed(const Duration(milliseconds: 500), () {
+      Navigator.of(context).push(_createRoute());
     });
+  }
+
+  // Custom Routing to get fade in effect
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => LoginScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(
+          opacity: animation,
+          child: child,
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 1000),
+    );
   }
 
   @override
@@ -137,6 +158,7 @@ class _SplashScreenState extends State<SplashScreen>
             AnimatedBuilder(
               animation: _controller,
               builder: (context, child) {
+                // Container Hero
                 return Hero(
                   tag: 'containerHero',
                   child: AnimatedContainer(
@@ -165,9 +187,10 @@ class _SplashScreenState extends State<SplashScreen>
                 );
               },
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 3.h),
             SlideTransition(
               position: _textAnimation,
+              // Text Hero
               child: Hero(
                 tag: 'textHero',
                 child: Text(
@@ -179,6 +202,7 @@ class _SplashScreenState extends State<SplashScreen>
             const Spacer(),
             FadeTransition(
               opacity: _bottomTextOpacityAnimation,
+              // Bottom Text Hero
               child: Hero(
                 tag: 'bottomTextHero',
                 child: Text(

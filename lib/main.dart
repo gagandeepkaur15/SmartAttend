@@ -18,20 +18,30 @@ class MyApp extends StatelessWidget {
         title: 'Attendance App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xffe43e3a)),
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xffE43E3A)),
           useMaterial3: true,
-          primaryColor: const Color(0xffe43e3a),
+          primaryColor: const Color(0xffE43E3A),
           highlightColor: Colors.white,
+          disabledColor: const Color(0xffDADADA),
           scaffoldBackgroundColor: Colors.white,
           textTheme: TextTheme(
             headlineLarge: TextStyle(
               color: Colors.white,
-              fontSize: 21.sp,
-              fontWeight: FontWeight.w500,
+              fontSize: 23.sp,
+              fontWeight: FontWeight.w600,
             ),
+            bodyMedium: TextStyle(
+                color: Colors.black,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w700),
             bodySmall: TextStyle(
+                color: Colors.black,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400),
+            labelSmall: TextStyle(
               color: Colors.black,
-              fontSize: 14.sp,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ),
