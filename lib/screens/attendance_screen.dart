@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nami_task/widgets/app_bar.dart';
 import 'package:nami_task/widgets/back_button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -99,9 +100,14 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
             SizedBox(height: 5.h),
 
             // button hero
-            const Hero(
-              tag: "button",
-              child: PrimaryButton(text: "Mark Attendance"),
+            GestureDetector(
+              onTap: () {
+                context.push("/camera");
+              },
+              child: const Hero(
+                tag: "button",
+                child: PrimaryButton(text: "Mark Attendance"),
+              ),
             ),
             SizedBox(height: 5.h),
             Row(
@@ -190,68 +196,10 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
             ),
 
             //Attendance Data Rows
-            Expanded(
-              child: ListView.builder(
-                  itemCount: _days.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      width: 100.w,
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 5.w, vertical: 0.8.h),
-                      margin: EdgeInsets.only(bottom: 0.5.h),
-                      decoration: BoxDecoration(
-                        color: _attendance[index] == "Present"
-                            ? Theme.of(context).indicatorColor
-                            : const Color(0xffFFE3E3),
-                        borderRadius: BorderRadius.circular(10.sp),
-                      ),
-                      child: Row(
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              _dates[index],
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                            ),
-                          ),
-                          SizedBox(width: 10.w),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              _days[index],
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                            ),
-                          ),
-                          const Spacer(),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Text(
-                              _attendance[index],
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-            ),
+            AttendanceRows(days: _days, attendance: _attendance, dates: _dates),
+
+            // bottom text hero
             Center(
-              // bottom text hero
               child: Hero(
                 tag: 'bottomTextHero',
                 child: Text("Powered by Lucify",
@@ -262,6 +210,75 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class AttendanceRows extends StatelessWidget {
+  const AttendanceRows({
+    super.key,
+    required List<String> days,
+    required List<String> attendance,
+    required List<String> dates,
+  })  : _days = days,
+        _attendance = attendance,
+        _dates = dates;
+
+  final List<String> _days;
+  final List<String> _attendance;
+  final List<String> _dates;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+          itemCount: _days.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              width: 100.w,
+              padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 0.8.h),
+              margin: EdgeInsets.only(bottom: 0.5.h),
+              decoration: BoxDecoration(
+                color: _attendance[index] == "Present"
+                    ? Theme.of(context).indicatorColor
+                    : const Color(0xffFFE3E3),
+                borderRadius: BorderRadius.circular(10.sp),
+              ),
+              child: Row(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      _dates[index],
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.w400,
+                          ),
+                    ),
+                  ),
+                  SizedBox(width: 10.w),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      _days[index],
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.w400,
+                          ),
+                    ),
+                  ),
+                  const Spacer(),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      _attendance[index],
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.w400,
+                          ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nami_task/screens/attendance_screen.dart';
+import 'package:nami_task/screens/camera_screen.dart';
+import 'package:nami_task/screens/code_screen.dart';
 import 'package:nami_task/screens/course_list_screen.dart';
 import 'package:nami_task/screens/login_screen.dart';
 import 'package:nami_task/screens/splash_screen.dart';
@@ -106,6 +108,16 @@ final _router = GoRouter(
           transitionDuration: const Duration(milliseconds: 1000),
         );
       },
+    ),
+    GoRoute(
+      name: 'Camera',
+      path: '/camera',
+      builder: (context, state) => const CameraScreen(),
+    ),
+    GoRoute(
+      name: 'Code',
+      path: '/code',
+      builder: (context, state) => const CodeScreen(),
     ),
   ],
 );

@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen>
     // AnimationController Initialization
     _controller = AnimationController(
       vsync: this, // Required for animation to work properly
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 400),
     );
 
     // Text Controller Initialization
@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     // Tween for container width animation
     _containerWidthAnimation = Tween<double>(
-      begin: 70.w,
+      begin: 90.w,
       end: 30.w,
     ).animate(CurvedAnimation(
       parent: _controller,
