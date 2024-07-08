@@ -21,6 +21,8 @@ class _LoginScreenState extends State<LoginScreen>
   late AnimationController _controller;
   late Animation<Offset> _columnAnimation;
 
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
@@ -55,99 +57,126 @@ class _LoginScreenState extends State<LoginScreen>
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.sp),
           child: Center(
-            child: ListView(
-              children: [
-                AnimatedBuilder(
-                    animation: _controller,
-                    builder: (context, child) {
-                      return SlideTransition(
-                        position: _columnAnimation,
-                        child: Column(
-                          children: [
-                            SizedBox(height: 6.h),
+            child: Form(
+              key: _formKey,
+              child: ListView(
+                children: [
+                  AnimatedBuilder(
+                      animation: _controller,
+                      builder: (context, child) {
+                        return SlideTransition(
+                          position: _columnAnimation,
+                          child: Column(
+                            children: [
+                              SizedBox(height: 6.h),
 
-                            // Container Hero
-                            Hero(
-                              tag: 'containerHero',
-                              child: Container(
-                                width: 30.w,
-                                height: 13.h,
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).highlightColor,
-                                  borderRadius: BorderRadius.circular(20.sp),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Theme.of(context)
-                                          .primaryColor
-                                          .withOpacity(0.4),
-                                      blurRadius: 10.sp,
-                                      offset: Offset(-10.sp, 10.sp),
+                              // Container Hero
+                              Hero(
+                                tag: 'containerHero',
+                                child: Container(
+                                  width: 30.w,
+                                  height: 13.h,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).highlightColor,
+                                    borderRadius: BorderRadius.circular(20.sp),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Theme.of(context)
+                                            .primaryColor
+                                            .withOpacity(0.4),
+                                        blurRadius: 10.sp,
+                                        offset: Offset(-10.sp, 10.sp),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Center(
+                                    child: Padding(
+                                      padding: EdgeInsets.all(15.sp),
+                                      child: Image.asset(
+                                        'assets/logo.png',
+                                        width: 100.w,
+                                        height: 100.h,
+                                      ),
                                     ),
-                                  ],
-                                ),
-                                child: Center(
-                                  child: Icon(
-                                    Icons.person,
-                                    color: Theme.of(context).primaryColor,
-                                    size: 40.sp,
                                   ),
                                 ),
                               ),
-                            ),
-                            SizedBox(height: 3.h),
+                              SizedBox(height: 3.h),
 
-                            // Text Hero
-                            Hero(
-                              tag: 'textHero',
-                              child: Text(
-                                "SmartAttend",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineLarge!
-                                    .copyWith(
-                                      color: Theme.of(context).primaryColor,
-                                    ),
+                              // Text Hero
+                              Hero(
+                                tag: 'textHero',
+                                child: Text(
+                                  "SmartAttend",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineLarge!
+                                      .copyWith(
+                                        color: Theme.of(context).primaryColor,
+                                      ),
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 10.h),
+                              SizedBox(height: 10.h),
 
-                            // Login Fields
-                            CustomTextField(
-                                hintText: "Your ID", controller: idCont),
-                            CustomTextField(
-                                hintText: "Password", controller: passCont),
-                            GestureDetector(
-                              onTap: () {
-                                context.go('/courseList');
-                              },
-                              child: const PrimaryButton(
-                                text: "Log in",
+                              // Login Fields
+
+                              CustomTextField(
+                                hintText: "Your ID",
+                                controller: idCont,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your ID';
+                                  }
+                                  return null;
+                                },
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 1.h),
-                              child: Text("Forgot Password",
-                                  style:
-                                      Theme.of(context).textTheme.bodyMedium),
-                            ),
-                            SizedBox(height: 2.h),
-                            const WhiteButton(text: "Create new account"),
-                          ],
-                        ),
-                      );
-                    }),
-                SizedBox(height: 12.h),
+                              CustomTextField(
+                                hintText: "Password",
+                                controller: passCont,
+                                obscureText: true,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter your password';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    // If the form is valid
+                                    context.go('/courseList');
+                                  }
+                                },
+                                child: const PrimaryButton(
+                                  text: "Log in",
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: 1.h),
+                                child: Text("Forgot Password",
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium),
+                              ),
+                              SizedBox(height: 2.h),
+                              const WhiteButton(text: "Create new account"),
+                            ],
+                          ),
+                        );
+                      }),
+                  SizedBox(height: 12.h),
 
-                // Bottom Text Hero
-                Center(
-                  child: Hero(
-                    tag: 'bottomTextHero',
-                    child: Text("Powered by Lucify",
-                        style: Theme.of(context).textTheme.bodySmall),
+                  // Bottom Text Hero
+                  Center(
+                    child: Hero(
+                      tag: 'bottomTextHero',
+                      child: Text("Powered by Lucify",
+                          style: Theme.of(context).textTheme.bodySmall),
+                    ),
                   ),
-                ),
-                SizedBox(height: 2.h),
-              ],
+                  SizedBox(height: 2.h),
+                ],
+              ),
             ),
           ),
         ),

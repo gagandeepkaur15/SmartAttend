@@ -18,6 +18,8 @@ class _CodeScreenState extends State<CodeScreen>
   late Animation<Offset> _screenAnimation;
   late AnimationController _controller;
 
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
@@ -82,26 +84,38 @@ class _CodeScreenState extends State<CodeScreen>
         padding: EdgeInsets.symmetric(horizontal: 20.sp, vertical: 2.h),
         child: SlideTransition(
           position: _screenAnimation,
-          child: ListView(
-            children: [
-              SizedBox(height: 20.h),
-              Text(
-                "Please enter code given by Professor",
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              SizedBox(height: 2.h),
-              CustomTextField(
-                  hintText: "Enter Code", controller: codeController),
-              SizedBox(height: 2.h),
-              GestureDetector(
-                onTap: () {
-                  if (codeController.text.isNotEmpty) {
-                    _showAnimatedDialog(context);
-                  }
-                },
-                child: const PrimaryButton(text: "Submit"),
-              ),
-            ],
+          child: Form(
+            key: _key,
+            child: ListView(
+              children: [
+                SizedBox(height: 20.h),
+                Text(
+                  "Please enter code given by Professor",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                SizedBox(height: 2.h),
+                CustomTextField(
+                  hintText: "Enter Code",
+                  controller: codeController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter the code';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 2.h),
+                GestureDetector(
+                  onTap: () {
+                    if (_key.currentState!.validate()) {
+                      // If the form is valid
+                      _showAnimatedDialog(context);
+                    }
+                  },
+                  child: const PrimaryButton(text: "Submit"),
+                ),
+              ],
+            ),
           ),
         ),
       ),

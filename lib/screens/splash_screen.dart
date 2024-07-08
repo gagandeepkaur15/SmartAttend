@@ -86,7 +86,7 @@ class _SplashScreenState extends State<SplashScreen>
     // Tween for icon size animation
     _iconSizeAnimation = Tween<double>(
       begin: 10.sp,
-      end: 40.sp,
+      end: 100.sp,
     ).animate(CurvedAnimation(
       parent: _controller,
       curve: Curves.easeInOut,
@@ -154,10 +154,13 @@ class _SplashScreenState extends State<SplashScreen>
                             child: AnimatedBuilder(
                               animation: _controller,
                               builder: (context, child) {
-                                return Icon(
-                                  Icons.person,
-                                  color: Theme.of(context).primaryColor,
-                                  size: _iconSizeAnimation.value,
+                                return Padding(
+                                  padding: EdgeInsets.all(15.sp),
+                                  child: Image.asset(
+                                    'assets/logo.png',
+                                    width: _iconSizeAnimation.value,
+                                    height: _iconSizeAnimation.value,
+                                  ),
                                 );
                               },
                             ),

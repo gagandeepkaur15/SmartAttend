@@ -16,7 +16,7 @@ class AttendanceScreen extends StatefulWidget {
 
 class _AttendanceScreenState extends State<AttendanceScreen> {
   final String location = "LH 121";
-  final String time = "11 AM";
+  final String time = " 11:00 AM";
 
   // Value selected from dropdown
   String? _selectedValue;
@@ -86,10 +86,10 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 SizedBox(width: 8.w),
-                Icon(
-                  Icons.timer,
-                  color: Theme.of(context).primaryColor,
-                  size: 20.sp,
+                Image.asset(
+                  'assets/clock.png',
+                  width: 6.w,
+                  height: 3.h,
                 ),
                 Text(
                   time,
