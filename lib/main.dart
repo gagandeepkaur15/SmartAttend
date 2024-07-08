@@ -7,8 +7,10 @@ import 'package:nami_task/screens/course_list_screen.dart';
 import 'package:nami_task/screens/login_screen.dart';
 import 'package:nami_task/screens/splash_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: '.env');
   runApp(const MyApp());
 }
 
