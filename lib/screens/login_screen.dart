@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen>
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.sp),
           child: Center(
-            child: Column(
+            child: ListView(
               children: [
                 AnimatedBuilder(
                     animation: _controller,
@@ -136,13 +136,15 @@ class _LoginScreenState extends State<LoginScreen>
                         ),
                       );
                     }),
-                const Spacer(),
+                SizedBox(height: 12.h),
 
                 // Bottom Text Hero
-                Hero(
-                  tag: 'bottomTextHero',
-                  child: Text("Powered by Lucify",
-                      style: Theme.of(context).textTheme.bodySmall),
+                Center(
+                  child: Hero(
+                    tag: 'bottomTextHero',
+                    child: Text("Powered by Lucify",
+                        style: Theme.of(context).textTheme.bodySmall),
+                  ),
                 ),
                 SizedBox(height: 2.h),
               ],

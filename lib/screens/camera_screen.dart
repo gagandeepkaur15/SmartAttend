@@ -31,7 +31,7 @@ class _CameraScreenState extends State<CameraScreen>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 1000),
     );
 
     _screenAnimation = Tween<Offset>(
@@ -223,7 +223,9 @@ class _CameraWidgetState extends State<CameraWidget> {
           SizedBox(height: 5.h),
           GestureDetector(
             onTap: () {
-              context.push("/code");
+              if (percent >= 1.0) {
+                context.push("/code");
+              }
             },
             child: const PrimaryButton(text: "Capture"),
           ),
