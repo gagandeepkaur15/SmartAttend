@@ -1,4 +1,3 @@
-// socket_provider.dart
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -28,6 +27,13 @@ final messageStreamProvider = StreamProvider.autoDispose<Message>((ref) async* {
     final serverData = jsonDecode(data);
     final message = Message.fromJson(serverData);
     streamController.add(message);
+
+    // Foreground Notification
+
+    // LocalNotifications.showNotification(
+    //     title: message.title,
+    //     body: message.body,
+    //     payload: "Notification from socket");
   });
 
   ref.onDispose(() {

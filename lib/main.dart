@@ -7,11 +7,25 @@ import 'package:nami_task/screens/code_screen.dart';
 import 'package:nami_task/screens/course_list_screen.dart';
 import 'package:nami_task/screens/login_screen.dart';
 import 'package:nami_task/screens/splash_screen.dart';
+import 'package:nami_task/services/background_service.dart';
+import 'package:nami_task/services/local_notification_initialization.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
+  // Asking for permission if permission is denied
+  await Permission.notification.isDenied.then((value) {
+    if (value) {
+      Permission.notification.request();
+    }
+  });
+  // Initializing Local Notifications
+  await LocalNotifications.init();
+  // Initializing Background Service
+  await initializeService();
   runApp(
     const ProviderScope(
       child: MyApp(),

@@ -3,6 +3,7 @@
 // import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:nami_task/models/message_model.dart';
 import 'package:nami_task/providers/socket_provider.dart';
@@ -32,6 +33,8 @@ class _CodeScreenState extends State<CodeScreen>
   late socket_io.Socket socket;
   // final StreamController<String> _streamController = StreamController<String>();
   // final _streamController = StreamController<Message>();
+
+  String buttonText = "Stop Service";
 
   @override
   void initState() {
@@ -175,8 +178,10 @@ class _CodeScreenState extends State<CodeScreen>
                           _showAnimatedDialog(context);
                           final socketValue = ref.watch(socketProvider);
                           socketValue.when(
-                            data: (socket) {
+                            data: (socket) async {
                               socket.emit('user-message', codeController.text);
+                              FlutterBackgroundService()
+                                  .invoke('setAsBackground');
                             },
                             loading: () {
                               debugPrint('Socket is loading');
@@ -233,6 +238,13 @@ class _CodeScreenState extends State<CodeScreen>
                 //       );
                 //     }
                 //   },
+                // ),
+
+                // ElevatedButton(
+                //   onPressed: () {
+                //     FlutterBackgroundService().invoke('setAsForeground');
+                //   },
+                //   child: const Text("Foreground"),
                 // ),
 
                 // Stream Builder
