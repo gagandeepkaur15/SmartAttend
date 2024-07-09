@@ -10,7 +10,7 @@ class LocalNotifications {
         AndroidInitializationSettings('@mipmap/ic_launcher');
     final DarwinInitializationSettings initializationSettingsDarwin =
         DarwinInitializationSettings(
-            onDidReceiveLocalNotification: (id, title, body, payload) => null);
+            onDidReceiveLocalNotification: (id, title, body, payload) {});
     const LinuxInitializationSettings initializationSettingsLinux =
         LinuxInitializationSettings(defaultActionName: 'Open notification');
     final InitializationSettings initializationSettings =
@@ -20,7 +20,7 @@ class LocalNotifications {
             macOS: initializationSettingsDarwin,
             linux: initializationSettingsLinux);
     _flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onDidReceiveNotificationResponse: (_) => null);
+        onDidReceiveNotificationResponse: (_) {});
   }
 
   // Displaying Notification
