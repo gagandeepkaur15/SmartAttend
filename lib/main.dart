@@ -83,11 +83,11 @@ class MyApp extends StatelessWidget {
 }
 
 final _router = GoRouter(
-  initialLocation: '/splash',
+  initialLocation: '/',
   routes: [
     GoRoute(
       name: 'Splash',
-      path: '/splash',
+      path: '/',
       builder: (context, state) => const SplashScreen(),
     ),
     GoRoute(

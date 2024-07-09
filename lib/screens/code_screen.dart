@@ -1,11 +1,6 @@
-// import 'dart:async';
-// import 'dart:convert';
-// import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:nami_task/models/message_model.dart';
 import 'package:nami_task/providers/socket_provider.dart';
 import 'package:nami_task/widgets/app_bar.dart';
 import 'package:nami_task/widgets/back_button.dart';
@@ -57,21 +52,16 @@ class _CodeScreenState extends State<CodeScreen>
   }
 
   // void connectToSocket() {
-  //   // Configure the socket connection
   //   socket = socket_io.io(dotenv.env['SOCKET_URL'], <String, dynamic>{
   //     'transports': ['websocket'],
   //     'autoConnect': false,
   //   });
 
-  //   // Connect to the server
   //   socket.connect();
 
-  //   // Handle socket events
   //   socket.on('connect', (_) {
   //     debugPrint('Connected to the server');
   //   });
-
-  //   // Receiving server message
 
   //   // socket.on('response-message', (data) {
   //   //   debugPrint('Message from server: $data');
@@ -90,7 +80,6 @@ class _CodeScreenState extends State<CodeScreen>
   //     debugPrint('Disconnected from the server');
   //   });
 
-  //   // Emit a message to the server
   //   socket.emit('user-message', codeController.text);
   // }
 
@@ -161,15 +150,6 @@ class _CodeScreenState extends State<CodeScreen>
                   },
                 ),
                 SizedBox(height: 2.h),
-                // GestureDetector(
-                //   onTap: () {
-                //     if (_key.currentState!.validate()) {
-                //       _showAnimatedDialog(context);
-                //       connectToSocket();
-                //     }
-                //   },
-                //   child: const PrimaryButton(text: "Submit"),
-                // ),
                 Consumer(
                   builder: (context, ref, child) {
                     return GestureDetector(
