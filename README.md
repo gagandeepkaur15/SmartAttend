@@ -1,16 +1,27 @@
-# nami_task
+# SmartAttend
 
-A new Flutter project.
+## Description
+
+This Flutter application showcases a variety of features designed to enhance user interaction and functionality. It includes dynamic animations, front camera integration with a timer, real-time socket communication, background services and notifications.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To run this application on your local machine, follow these steps:
 
-A few resources to get you started if this is your first Flutter project:
+1. Clone this repository
+2. Navigate to the project directory
+3. Install dependencies:
+   flutter pub get
+4. Run the app
+   flutter run
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Setup for ngrok server
+- Install ngrok from [ngrok.com](https://ngrok.com) and follow the setup instructions.
+- Run ngrok to expose your local socket server. For example:
+  ```
+  ngrok http 3000
+  ```
+- Copy the ngrok URL and set it as an environment variable in your development environment
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Server Repository:**
+- The socket server code is available in [Server Repository](https://github.com/gagandeepkaur15/Echo-Socket.git).
